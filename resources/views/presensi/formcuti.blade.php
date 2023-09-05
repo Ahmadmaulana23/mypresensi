@@ -29,22 +29,28 @@
             <form action="/presensi/storecuti" method="POST" id="frmcuti">
                 @csrf
                         <div class="form-group">
-                            <input type="text" id="tgl_cuti" name="tgl_cuti" class="form-control datepicker" placeholder="Tanggal Mulai Cuti">
+                            <input type="text" id="tgl_cuti_dari" name="tgl_cuti_dari" class="form-control datepicker" placeholder="Mulai">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="tgl_cuti_sampai" name="tgl_cuti_sampai" class="form-control datepicker" placeholder="Sampai">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="jml_hari" name="jml_hari" class="form-control datepicker" placeholder="Jumlah Hari">
                         </div>
                         <div class="form-group">
                             <select name="status_cuti" id="status_cuti" class="form-control">
                                 <option value="">Status (Cuti)</option>
-                                <option value="L1">Pernikahan Karyawan(3Hari)</option>
-                                <option value="L2">Pernikahan Anak Karyawan(2Hari)</option>
-                                <option value="L3">Khitan atau Pembaptisan Anak Karyawan(2Hari)</option>
-                                <option value="L4">Cuti Istri Melahirkan(3Hari)</option>
-                                <option value="L5">Orang Tua/Mertua/Anak/Istri Meninggal Dunia(2Hari)</option>
-                                <option value="L6">Kematian Anggota Keluarga dalam satu Rumah(1Hari)</option>
-                                <option value="L7">Cuti Haid(2Hari)</option>
-                                <option value="L8">Cuti Tahunan</option>
-                                <option value="L9">Cuti Bencana Alam(1Hari)</option>
-                                <option value="M">Karyawati Keguguran(1,5Bulan)</option>
-                                <option value="B">Karyawati Melahirkan(3Bulan)</option>
+                                <option value="(L1) Pernikahan Karyawan">Pernikahan Karyawan(3Hari)</option>
+                                <option value="(L2) Pernikahan Anak Karyawan">Pernikahan Anak Karyawan(2Hari)</option>
+                                <option value="(L3) Khitan atau Pembaptisan Anak Karyawan">Khitan atau Pembaptisan Anak Karyawan(2Hari)</option>
+                                <option value="(L4) Cuti Istri Melahirkan">Cuti Istri Melahirkan(3Hari)</option>
+                                <option value="(L5) Orang Tua/Mertua/Anak/Istri Meninggal Dunia">Orang Tua/Mertua/Anak/Istri Meninggal Dunia(2Hari)</option>
+                                <option value="(L6) Kematian Anggota Keluarga dalam satu Rumah">Kematian Anggota Keluarga dalam satu Rumah(1Hari)</option>
+                                <option value="(L7) Cuti Haid">Cuti Haid(2Hari)</option>
+                                <option value="(L8) Cuti Tahunan">Cuti Tahunan</option>
+                                <option value="(L9) Cuti Bencana Alam">Cuti Bencana Alam(1Hari)</option>
+                                <option value="(M) Karyawati Keguguran">Karyawati Keguguran(1,5Bulan)</option>
+                                <option value="(B) Karyawati Melahirkan">Karyawati Melahirkan(3Bulan)</option>
 
                             </select>
                         </div>
@@ -69,35 +75,60 @@ $(document).ready(function() {
     format: "yyyy-mm-dd"
   });
 
-  $("#tgl_cuti").change(function(e){
-    var tgl_cuti = $(this).val();
-    $.ajax({
-        type:'POST',
-        url:'/presensi/cekcuti',
-        data:{
-            _token: "{{ csrf_token() }}",
-            tgl_izin:tgl_izin
-        },
-        cache:false,
-        success: function(respond){
-            if (respond == 1) {
-                Swal.fire({
-                title: 'Oops !',
-                text: 'Anda telah melakukan permohonan cuti hari ini !',
-                icon: 'warning'
-                }).then((result) => {
-                    $("#tgl_cuti").val("");
-                });
-            }
-        }
-    });
-  });
+function loadjumlahhari() {
+    var dari = $("#tgl_cuti_dari").val();
+    var sampai = $("#tgl_cuti_sampai").val();
+    var date1 = new Date(dari);
+    var date2 = new Date(sampai);
+
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 *24);
+
+
+    if (dari == "" || sampai == "") {
+        var jmlhari = 0;
+    }else{
+        var jmlhari = Difference_In_Days +1;
+    }
+
+    $("#jml_hari").val(jmlhari + " Hari");
+
+}
+$("#tgl_cuti_dari, #tgl_cuti_sampai").change(function(e) {
+    loadjumlahhari();
+});
+
+
+//   $("#tgl_cuti").change(function(e){
+//     var tgl_cuti = $(this).val();
+//     $.ajax({
+//         type:'POST',
+//         url:'/presensi/cekcuti',
+//         data:{
+//             _token: "{{ csrf_token() }}",
+//             tgl_izin:tgl_izin
+//         },
+//         cache:false,
+//         success: function(respond){
+//             if (respond == 1) {
+//                 Swal.fire({
+//                 title: 'Oops !',
+//                 text: 'Anda telah melakukan permohonan cuti hari ini !',
+//                 icon: 'warning'
+//                 }).then((result) => {
+//                     $("#tgl_cuti").val("");
+//                 });
+//             }
+//         }
+//     });
+//   });
 
   $("#frmcuti").submit(function(){
-    var tgl_cuti = $("#tgl_cuti").val();
+    var tgl_cuti_dari = $("#tgl_cuti_dari").val();
+    var tgl_cuti_sampai = $("#tgl_cuti_sampai").val();
     var status = $("#status").val();
     var keterangan = $("#keterangan").val();
-    if (tgl_cuti == "") {
+    if (tgl_cuti_dari == "" || tgl_cuti_sampai == "") {
         Swal.fire({
         title: 'Oops !',
         text: 'Tanggal Harus di Isi !',

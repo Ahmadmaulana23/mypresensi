@@ -48,8 +48,8 @@ class DashboardController extends Controller
         $rekapcuti = DB::table('cuti')
         ->selectRaw('COUNT(status_cuti) as jmlcuti')
         ->where('nik', $nik)
-        ->whereRaw('MONTH(tgl_cuti)="'.$bulanini . '"')
-        ->whereRaw('YEAR(tgl_cuti)="'.$tahunini . '"')
+        ->whereRaw('MONTH(tgl_cuti_dari)="'.$bulanini . '"')
+        ->whereRaw('YEAR(tgl_cuti_dari)="'.$tahunini . '"')
         ->where('status_approved', 1)
         ->first();
         return view('dashboard.dashboard', compact('presensihariini', 'historibulanini', 'namabulan', 'bulanini', 'tahunini'
@@ -72,7 +72,8 @@ class DashboardController extends Controller
 
         $rekapcuti = DB::table('cuti')
         ->selectRaw('COUNT(status_cuti) as jmlcuti')
-        ->where('tgl_cuti', $hariini)
+        ->where('tgl_cuti_dari', $hariini)
+        ->where('tgl_cuti_sampai', $hariini)
         ->where('status_approved', 1)
         ->first();
 

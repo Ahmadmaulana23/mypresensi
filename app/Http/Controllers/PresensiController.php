@@ -56,8 +56,11 @@ class PresensiController extends Controller
         $jamkerja = DB::table('konfig_jamkerja')
         ->join('jam_kerja','konfig_jamkerja.kode_jam_kerja', '=', 'jam_kerja.kode_jam_kerja')
         ->where('nik', $nik)->where('hari', $namahari)->first();
-
+        if ($jamkerja ==null) {
+            return view('presensi.notif');
+        }else{
         return view('presensi.create', compact('cek', 'lokasi_kantor','jamkerja'));
+        }
     }
 
 
@@ -279,13 +282,15 @@ class PresensiController extends Controller
     public function storecuti(Request $request)
     {
         $nik = Auth::guard('karyawan')->user()->nik;
-        $tgl_cuti = $request->tgl_cuti;
+        $tgl_cuti_dari = $request->tgl_cuti_dari;
+        $tgl_cuti_sampai = $request->tgl_cuti_sampai;
         $status_cuti = $request->status_cuti;
         $keterangan = $request->keterangan;
 
         $data = [
             'nik' => $nik,
-            'tgl_cuti' => $tgl_cuti,
+            'tgl_cuti_dari' => $tgl_cuti_dari,
+            'tgl_cuti_sampai' => $tgl_cuti_sampai,
             'status_cuti' => $status_cuti,
             'keterangan' => $keterangan
         ];
@@ -478,10 +483,10 @@ class PresensiController extends Controller
     {
 
         $query = Pengajuancuti::query();
-        $query->select('id','tgl_cuti', 'cuti.nik', 'nama_lengkap', 'jabatan','status_cuti','status_approved', 'keterangan');
+        $query->select('id','tgl_cuti_dari', 'tgl_cuti_sampai','cuti.nik', 'nama_lengkap', 'jabatan','status_cuti','status_approved', 'keterangan');
         $query->join('karyawan','cuti.nik','=','karyawan.nik');
         if (!empty($request->dari) && !empty($request->sampai)) {
-            $query->whereBetween('tgl_cuti', [$request->dari, $request->sampai]);
+            $query->whereBetween('tgl_cuti_dari , tgl_cuti_sampai', [$request->dari, $request->sampai]);
         }
         if (!empty($request->nik)){
             $query->where('cuti.nik', $request->nik);
@@ -492,7 +497,7 @@ class PresensiController extends Controller
         if ($request->status_approved == '0' || $request->status_approved == '1' || $request->status_approved == '2'){
             $query->where('status_approved', $request->status_approved);
         }
-        $query->orderBy('tgl_cuti', 'desc');
+        $query->orderBy('tgl_cuti_dari', 'desc');
         $pengajuancuti = $query->paginate(10);
         $pengajuancuti->appends($request->all());
         return view('presensi.pengajuancuti' ,compact('pengajuancuti'));

@@ -43,7 +43,8 @@
     <div class="item">
             <div class="in">
                 <div>
-                    <b> {{ date("d-m-Y", strtotime($d->tgl_cuti)) }} {{ $d->status_cuti }}</b><br>
+                    <b> {{ date("d-m-Y", strtotime($d->tgl_cuti_dari)) }} s/d {{ date("d-m-Y", strtotime($d->tgl_cuti_sampai)) }} </b><br>
+                    <b>{{ $d->status_cuti }}</b><br>
                     <small class="text-muted"> {{ $d->keterangan }}</small>
                         </div>
                         @if ($d->status_approved == 0)

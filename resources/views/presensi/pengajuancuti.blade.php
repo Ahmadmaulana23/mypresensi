@@ -108,7 +108,8 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Tanggal</th>
+                                    <th>Mulai</th>
+                                    <th>Sampai</th>
                                     <th>Nik</th>
                                     <th>Nama Karyawan</th>
                                     <th>Jabatan</th>
@@ -121,7 +122,8 @@
                             @foreach($pengajuancuti as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ date('d-m-Y', strtotime($d->tgl_cuti)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($d->tgl_cuti_dari)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($d->tgl_cuti_sampai)) }}</td>
                                 <td>{{ $d->nik }}</td>
                                 <td>{{ $d->nama_lengkap }}</td>
                                 <td>{{ $d->jabatan }}</td>

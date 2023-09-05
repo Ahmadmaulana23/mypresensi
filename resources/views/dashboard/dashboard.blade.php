@@ -18,7 +18,7 @@
                     @php
                     $path = Storage::url('uploads/karyawan/'.Auth::guard('karyawan')->user()->foto);
                     @endphp
-                    <img src="{{ url($path) }}" alt="avatar" class="imaged w64" style="height: 60px">
+                    <img src="{{ url($path) }}" alt="avatar" class="imaged w64" style="height: 70px">
                     @else
                     <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
                     @endif
@@ -36,7 +36,7 @@
                     <div class="list-menu">
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="/editprofile" class="green item {{request()->is('presensi/cuti') ? 'active' : '' }} " style="font-size: 40px;">
+                                <a href="/editprofile" class="green item {{request()->is('presensi/editprofile') ? 'active' : '' }} " style="font-size: 40px;">
                                     <ion-icon name="person-sharp"></ion-icon>
                                 </a>
                             </div>
@@ -86,8 +86,8 @@
             <b>Silahkan Lakukan Presensi Kehadiran</b>
                 <div class="row">
                     <div class="col-6">
-                        <div class="card gradasigreen">
-                            <div class="card-body">
+                        <div class="card gradasigreen" >
+                            <div class="card-body" >
                                 <div class="presencecontent">
                                     <div class="iconpresence">
                                         @if ($presensihariini != null)
@@ -136,8 +136,8 @@
             <h3>Rekap Presensi Bulan {{ $namabulan[$bulanini] }} Tahun {{ $tahunini }}</h3>
             <div class="row mt-1">
                 <div class="col-3">
-                    <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
+                    <div class="card" >
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
                         {{ $rekap->jmlhadir }}</span>
                         <ion-icon name="accessibility-outline" style="font-size: 1.8rem;" class="text-primary"></ion-icon>
@@ -147,17 +147,17 @@
                 </div>
                 <div class="col-3">
                     <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
                     {{ $rekapizin->jmlizin }}</span>
-                        <ion-icon name="clipboard-outline" style="font-size: 1.8rem;" class="text-success"></ion-icon>
+                        <ion-icon name="alert-outline" style="font-size: 1.8rem;" class="text-success"></ion-icon>
                         <span style="font-size: 0.8rem; font-weight:500">Izin</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
                     {{ $rekapcuti->jmlcuti }}</span>
                         <ion-icon name="calendar-number-outline" style="font-size: 1.8rem;" class="text-cyan"></ion-icon>
@@ -167,16 +167,19 @@
                 </div>
                 <div class="col-3">
                     <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
                     {{ $rekapizin->jmlsakit }}</span>
                         <ion-icon name="medkit-outline" style="font-size: 1.8rem;" class="text-warning"></ion-icon>
                         <span style="font-size: 0.8rem; font-weight:500">Sakit</span></div>
                     </div>
                 </div>
+            </div>
+            <div class="row mt-1">
+
                 <div class="col-3">
                     <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.8rem">
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
                         {{ $rekap->jmlterlambat }}</span>
                         <ion-icon name="alarm-outline" style="font-size: 1.8rem;" class="text-danger"></ion-icon>
