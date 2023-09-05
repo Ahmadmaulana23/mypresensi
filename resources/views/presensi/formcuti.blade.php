@@ -126,7 +126,7 @@ $("#tgl_cuti_dari, #tgl_cuti_sampai").change(function(e) {
   $("#frmcuti").submit(function(){
     var tgl_cuti_dari = $("#tgl_cuti_dari").val();
     var tgl_cuti_sampai = $("#tgl_cuti_sampai").val();
-    var status = $("#status").val();
+    var status_cuti = $("#status_cuti").val();
     var keterangan = $("#keterangan").val();
     if (tgl_cuti_dari == "" || tgl_cuti_sampai == "") {
         Swal.fire({
@@ -135,7 +135,7 @@ $("#tgl_cuti_dari, #tgl_cuti_sampai").change(function(e) {
         icon: 'warning'
         });
         return false;
-    }else if (status == "") {
+    }else if (status_cuti == "") {
         Swal.fire({
         title: 'Oops !',
         text: 'Status Harus di Isi !',
