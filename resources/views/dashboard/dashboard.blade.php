@@ -135,7 +135,7 @@
         <div id="rekappresensi">
             <h3>Rekap Presensi Bulan {{ $namabulan[$bulanini] }} Tahun {{ $tahunini }}</h3>
             <div class="row mt-1">
-                <div class="col-3">
+                <div class="col-4">
                     <div class="card" >
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
@@ -145,17 +145,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
-                        <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
-                    {{ $rekapizin->jmlizin }}</span>
-                        <ion-icon name="alert-outline" style="font-size: 1.8rem;" class="text-success"></ion-icon>
-                        <span style="font-size: 0.8rem; font-weight:500">Izin</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
+
+                <div class="col-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
@@ -165,7 +156,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
+                        <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
+                    {{ $rekapizin->jmlizin }}</span>
+                        <ion-icon name="alert-outline" style="font-size: 1.8rem;" class="text-success"></ion-icon>
+                        <span style="font-size: 0.8rem; font-weight:500">Izin</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-2">
+            <div class="col-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
@@ -174,10 +178,7 @@
                         <span style="font-size: 0.8rem; font-weight:500">Sakit</span></div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-1">
-
-                <div class="col-3">
+                <div class="col-4">
                     <div class="card">
                         <div class="card-body text-center" style="padding: 12px 12px !important; line-height:0.7rem">
                         <span class="badge bg-danger" style="position: absolute; top:1px; right:5px; z-index:999">
@@ -223,7 +224,7 @@
                                 </div>
                                 <div class="datapresensi">
                                     <h3 style="line-height: 3px">{{ $d->nama_jam_kerja }}</h3>
-                                    <h4 style="margin:0px !important">{{ date("d-m-Y"),strtotime($d->tgl_presensi)}}</h4>
+                                    <h4 style="margin:0px !important">{{ date("Y-m-d"),strtotime($d->tgl_presensi)}}</h4>
                                     <span>
                                         {!! $d->jam_in !== null ? date("H:i",strtotime($d->jam_in)) : '
                                             <span class="text-danger">Belum Absen</span>' !!} s/d

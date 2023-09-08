@@ -1986,12 +1986,12 @@ a.badge-dark {
   background: #ffffff;
   border-radius: 6px;
   border: 0;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
 }
 
 .card .card-body {
-  padding: 24px 16px;
-  line-height: 1.4em;
+  padding:15px 16px;
+  line-height: 1.2em;
 }
 
 .card .card-title {
@@ -8019,7 +8019,7 @@ body.dark-mode-active .cart-item .cart-item-footer {
 #menu-section {
   position: absolute;
   width: 100%;
-  top: 120px;
+  top: 140px;
   z-index: 999;
 }
 
