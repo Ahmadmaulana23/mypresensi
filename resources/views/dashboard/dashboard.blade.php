@@ -224,7 +224,7 @@
                                 </div>
                                 <div class="datapresensi">
                                     <h3 style="line-height: 3px">{{ $d->nama_jam_kerja }}</h3>
-                                    <h4 style="margin:0px !important">{{ date("Y-m-d"),strtotime($d->tgl_presensi)}}</h4>
+                                    <h4 style="margin:0px !important">{{  $d->tgl_presensi }}</h4>
                                     <span>
                                         {!! $d->jam_in !== null ? date("H:i",strtotime($d->jam_in)) : '
                                             <span class="text-danger">Belum Absen</span>' !!} s/d
