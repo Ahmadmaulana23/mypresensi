@@ -252,6 +252,7 @@
         $("#btntambahjk").click(function(){
             $("#modal-inputjk").modal("show");
         });
+
         $(".delete-confirm").click(function(e){
             var form = $(this).closest('form');
             e.preventDefault();
