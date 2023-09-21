@@ -95,7 +95,7 @@ class KonfigurasiController extends Controller
         if ($hapus) {
             return Redirect::back()->with(['success'=>'Data Berhasil Di Hapus']);
         }else{
-            return Redirect::back()->with(['success'=>'Data Gagal Di Hapus']);
+            return Redirect::back()->with(['warning'=>'Data Gagal Di Hapus']);
         }
     }
     public function setjamkerja($nik)
