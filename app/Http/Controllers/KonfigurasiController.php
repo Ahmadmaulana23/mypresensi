@@ -89,7 +89,7 @@ class KonfigurasiController extends Controller
             return Redirect::back()->with(['warning'=>'Data Gagal Diperbarui']);
         }
     }
-    public function delete($kode_jam_kerja)
+    public function deletejamkerja($kode_jam_kerja)
     {
         $hapus = DB::table('jam_kerja')->where('kode_jam_kerja', $kode_jam_kerja)->delete();
         if ($hapus) {
