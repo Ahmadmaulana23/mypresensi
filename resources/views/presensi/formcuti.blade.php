@@ -35,7 +35,7 @@
                             <input type="text" id="tgl_cuti_sampai" name="tgl_cuti_sampai" class="form-control datepicker" placeholder="Sampai">
                         </div>
                         <div class="form-group">
-                            <input type="text" id="jml_hari" name="jml_hari" class="form-control datepicker" placeholder="Jumlah Hari">
+                            <input type="text" id="jml_hari" name="jml_hari" class="form-control datepicker" placeholder="Jumlah Hari" readonly>
                         </div>
                         <div class="form-group">
                             <select name="status_cuti" id="status_cuti" class="form-control">
@@ -85,10 +85,11 @@ function loadjumlahhari() {
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 *24);
 
 
+
     if (dari == "" || sampai == "") {
         var jmlhari = 0;
     }else{
-        var jmlhari = Difference_In_Days +1;
+        var jmlhari = Difference_In_Days + 1;
     }
 
     $("#jml_hari").val(jmlhari + " Hari");

@@ -230,7 +230,7 @@ class PresensiController extends Controller
         ->where('nik', $nik)
         ->whereRaw('MONTH(tgl_presensi)="'.$bulan . '"')
         ->whereRaw('YEAR(tgl_presensi)="'.$tahun . '"')
-        ->orderBy('tgl_presensi')
+        ->orderBy('tgl_presensi', 'asc')
         ->get();
 
         return view('presensi.gethistori', compact('histori'));
@@ -239,7 +239,10 @@ class PresensiController extends Controller
     public function izin()
     {
         $nik = Auth::guard('karyawan')->user()->nik;
-        $dataizin = DB::table('perizinan')->where('nik', $nik)->get();
+        $dataizin = DB::table('perizinan')
+        ->where('nik', $nik)
+        ->orderBy('tgl_izin', 'desc')
+        ->get();
         return view('presensi.izin', compact('dataizin'));
     }
 

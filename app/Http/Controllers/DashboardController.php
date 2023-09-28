@@ -10,7 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $hariini = date("Y-m-d");
+        $hariini = date("d-m-Y");
         $bulanini = date("m")*1;
         $tahunini = date("Y");
         $nik = Auth::guard('karyawan')->user()->nik;
@@ -20,7 +20,7 @@ class DashboardController extends Controller
         ->where('nik', $nik)
         ->whereRaw('MONTH(tgl_presensi)="'.$bulanini . '"')
         ->whereRaw('YEAR(tgl_presensi)="'.$tahunini . '"')
-        ->orderBy('tgl_presensi')
+        ->orderBy('tgl_presensi', 'desc')
         ->get();
 
         $rekap = DB::table('presensi')

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartemenController;
+use App\Http\Controllers\IzinabsenController;
+use App\Http\Controllers\IzinsakitController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KonfigurasiController;
 use App\Http\Controllers\PresensiController;
@@ -59,6 +61,9 @@ Route::middleware(['auth:karyawan'])->group(function(){
     Route::get('/presensi/formcuti', [PresensiController::class, 'formcuti']);
     Route::post('/presensi/storecuti', [PresensiController::class, 'storecuti']);
     Route::post('/presensi/cekcuti', [PresensiController::class, 'cekcuti']);
+
+    Route::get('/izinabsen', [IzinabsenController::class, 'create']);
+    Route::get('/izinsakit', [IzinsakitController::class, 'create']);
 });
 
 Route::middleware(['auth:user'])->group(function(){
@@ -103,6 +108,7 @@ Route::middleware(['auth:user'])->group(function(){
     Route::post('/konfigurasi/storejamkerja', [KonfigurasiController::class, 'storejamkerja']);
     Route::post('/konfigurasi/editjamkerja', [KonfigurasiController::class, 'editjamkerja']);
     Route::post('/konfigurasi/updatejamkerja', [KonfigurasiController::class, 'updatejamkerja']);
+    Route::post('/konfigurasi/deletejamkerja', [KonfigurasiController::class, 'deletejamkerja']);
     Route::get('/konfigurasi/{nik}/setjamkerja', [KonfigurasiController::class, 'setjamkerja']);
     Route::post('/konfigurasi/storesetjamkerja', [KonfigurasiController::class, 'storesetjamkerja']);
     Route::post('/konfigurasi/updatesetjamkerja', [KonfigurasiController::class, 'updatesetjamkerja']);
